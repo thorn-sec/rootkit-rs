@@ -2,6 +2,9 @@
 
 Blog: https://memn0ps.github.io/rusty-windows-kernel-rootkit/
 
+## Disclamer
+I am not the original creator of this project. I forked it in order to maintain it **for personnal and educational use** 
+
 ## Features (Development in progress)
 
 * Protect / unprotect process (Done)

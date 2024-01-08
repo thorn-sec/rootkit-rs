@@ -1,4 +1,4 @@
-use sysinfo::{Pid, SystemExt, ProcessExt};
+use sysinfo::{Pid, SystemExt, ProcessExt, PidExt};
 use winapi::um::{fileapi::{CreateFileA, OPEN_EXISTING}, winnt::{GENERIC_READ, GENERIC_WRITE, FILE_SHARE_READ, FILE_SHARE_WRITE}, handleapi::CloseHandle};
 use std::{ffi::CString, ptr::null_mut};
 mod kernel_interface;
@@ -117,7 +117,7 @@ fn main() {
 
     match &cli.command {
         Commands::Process(p) => {
-            let process_id = get_process_id_by_name(p.name.as_str()) as u32;
+            let process_id = get_process_id_by_name(p.name.as_str()).as_u32();
             
             if p.protect {
                 kernel_interface::protect_process(process_id, driver_handle);
@@ -168,9 +168,9 @@ fn get_process_id_by_name(target_process: &str) -> Pid {
     let mut system = sysinfo::System::new();
     system.refresh_all();
 
-    let mut process_id = 0;
-
-    for process in system.process_by_name(target_process) {
+    let mut process_id = Pid::from_u32(0);
+    
+    for process in system.processes_by_name(target_process) {
         process_id = process.pid();
     }
 

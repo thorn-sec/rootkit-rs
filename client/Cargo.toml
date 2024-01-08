@@ -7,6 +7,6 @@ edition = "2021"
 
 [dependencies]
 winapi = { version = "0.3.7", features = ["processthreadsapi", "memoryapi", "winbase", "impl-default", "errhandlingapi", "fileapi", "winioctl"] }
-sysinfo = "0.20.4"
+sysinfo = "0.26.0"
 clap = { version = "3.1.6", features = ["derive"] }
 common = { path = "../common" }
